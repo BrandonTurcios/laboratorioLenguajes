@@ -1,0 +1,43 @@
+//const std::vector<std::pair<std::string, TokenType>> reservedWords = {
+//    {"ABS", PalabraReservada}, {"ACONS", PalabraReservada}, {"ACOS", PalabraReservada}, {"Alt-A", PalabraReservada},
+//    {"Alt-D", PalabraReservada}, {"Alt-H", PalabraReservada}, {"Alt-K", PalabraReservada}, {"AND", Operador},
+//    {"APPEND", PalabraReservada}, {"APPLY", PalabraReservada}, {"ASIN", PalabraReservada}, {"ASSOC", PalabraReservada},
+//    {"ATAN", PalabraReservada}, {"ATOM", PalabraReservada}, {"BUTLAST", PalabraReservada}, {"CAR", PalabraReservada},
+//    {"CASE", PalabraReservada}, {"CDR", PalabraReservada}, {"CLOSE", PalabraReservada}, {"COND", PalabraReservada},{"CONCATENATE", PalabraReservada},
+//    {"CONS", PalabraReservada}, {"CONSP", PalabraReservada}, {"Control-C", PalabraReservada}, {"Control-D", PalabraReservada},
+//    {"Control-E", PalabraReservada}, {"Control-L", PalabraReservada}, {"Control-Pausa", PalabraReservada},
+//    {"COPY-LIST", PalabraReservada}, {"COS", PalabraReservada}, {"DEFUN", PalabraReservada}, {"DELETE", PalabraReservada},{"DEFMACRO", PalabraReservada},
+//    {"DESCRIBE", PalabraReservada}, {"DO", PalabraReservada}, {"DO*", PalabraReservada}, {"DOLIST", PalabraReservada},
+//    {"DOS", PalabraReservada}, {"DOTIMES", PalabraReservada}, {"DRIBBLE", PalabraReservada}, {"EQ", Operador},
+//    {"EQUAL", Operador}, {"EVAL", PalabraReservada}, {"EVENP", PalabraReservada}, {"EVERY", PalabraReservada},
+//    {"EXIT", PalabraReservada}, {"EXP", PalabraReservada}, {"EXPT", PalabraReservada}, {"FIRST", PalabraReservada},
+//    {"FORMAT", PalabraReservada},{"FOR", PalabraReservada}, {"FROM", PalabraReservada} ,{"FUNCALL", PalabraReservada},
+//    {"GET", PalabraReservada}, {"GO", PalabraReservada}, {"IF", PalabraReservada}, {"IFN", PalabraReservada}, {"LAMBDA", PalabraReservada}, {"LAST", PalabraReservada},
+//    {"LENGTH", PalabraReservada}, {"LET", PalabraReservada}, {"LET*", PalabraReservada}, {"LIST", PalabraReservada},
+//    {"LIST*", PalabraReservada}, {"LISTP", PalabraReservada}, {"LOAD", PalabraReservada}, {"LOG", PalabraReservada},
+//    {"LOOP", PalabraReservada}, {"MAKE-LIST", PalabraReservada}, {"MAKUNBOUND", PalabraReservada}, {"MAPC", PalabraReservada},
+//    {"MAPCAR", PalabraReservada}, {"MAPLIST", PalabraReservada}, {"MAX", Operador}, {"MEMBER", PalabraReservada},
+//    {"MIN", Operador}, {"MINUSP", PalabraReservada}, {"MOD", Operador}, {"NCONC", PalabraReservada},
+//    {"NIL", PalabraReservada}, {"NOT", Operador}, {"NTH", PalabraReservada}, {"NTHCDR", PalabraReservada},
+//    {"NULL", PalabraReservada}, {"NUMBERP", PalabraReservada}, {"ODDP", PalabraReservada}, {"OPEN", PalabraReservada},
+//    {"OR", Operador}, {"PAIRLIS", PalabraReservada}, {"PLUSP", PalabraReservada}, {"PRIN1", PalabraReservada},
+//    {"PRINC", PalabraReservada}, {"PRINT", PalabraReservada}, {"PROG", PalabraReservada}, {"PROG1", PalabraReservada},
+//    {"PROG2", PalabraReservada}, {"PROGN", PalabraReservada}, {"QUOTE", PalabraReservada}, {"RASSOC", PalabraReservada},
+//    {"READ", PalabraReservada}, {"READ-LINE", PalabraReservada}, {"REMOVE", PalabraReservada}, {"REMPROP", PalabraReservada},
+//    {"REST", PalabraReservada}, {"RETURN", PalabraReservada}, {"REVERSE", PalabraReservada}, {"RPLACA", PalabraReservada},
+//    {"RPLACD", PalabraReservada}, {"SECOND", PalabraReservada}, {"SET", PalabraReservada}, {"SETQ", PalabraReservada},
+//    {"SIN", PalabraReservada}, {"SOME", PalabraReservada}, {"SQRT", PalabraReservada}, {"STEP", PalabraReservada},
+//    {"SUBLIS", PalabraReservada}, {"SUBST", PalabraReservada}, {"SYMBOL-FUNCTION", PalabraReservada},
+//    {"SYMBOL-NAME", PalabraReservada}, {"SYMBOL-PLIST", PalabraReservada}, {"SYMBOL-PLIST", PalabraReservada},
+//    {"SYMBOL-PLIST", PalabraReservada}, {"SYMBOL-VALUE", PalabraReservada}, {"SYMBOLP", PalabraReservada},
+//    {"T", PalabraReservada}, {"TAN", PalabraReservada}, {"TERPRI", PalabraReservada}, {"THIRD", PalabraReservada},
+//    {"TIME", PalabraReservada}, {"TRACE", PalabraReservada}, {"UNLESS", PalabraReservada}, {"UNTRACE", PalabraReservada},
+//    {"WHEN", PalabraReservada}, {"WITH-OPEN-FILE", PalabraReservada}, {"ZEROP", PalabraReservada}
+//};
+//
+//const std::vector<std::pair<std::string, TokenType>> operators = {
+//    {"+", Operador}, {"-", Operador}, {"*", Operador}, {"/", Operador},
+//    {"MOD", Operador}, {"MAX", Operador}, {"MIN", Operador}, {"/=", Operador},
+//    {"=", Operador}, {">=", Operador}, {"<=", Operador}, {">", Operador}, {"<", Operador},
+//    {"1+", Operador}
+//};
