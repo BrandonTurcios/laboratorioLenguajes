@@ -20,7 +20,8 @@ enum TokenType
     String,
     ComillaSimple,
     Comma,
-    ComillaGrave 
+    ComillaGrave,
+    Delimitador
 };
 
 // Estructura para los tokens
@@ -52,7 +53,7 @@ vector<pair<string, TokenType>> reservedWords = {
     {"NIL", PalabraReservada}, {"NOT", PalabraReservada}, {"NTH", PalabraReservada}, {"NTHCDR", PalabraReservada},
     {"NULL", PalabraReservada}, {"NUMBERP", PalabraReservada}, {"ODDP", PalabraReservada}, {"OPEN", PalabraReservada},
     {"OR", PalabraReservada}, {"PAIRLIS", PalabraReservada}, {"PLUSP", PalabraReservada}, {"PRIN1", PalabraReservada},
-    {"PRINC", PalabraReservada}, {"PRINT", PalabraReservada}, {"PROG", PalabraReservada}, {"PROG1", PalabraReservada},
+    {"PRINC", PalabraReservada}, {"PRINT", PalabraReservada}, {"PROG", PalabraReservada}, {"PROG1", PalabraReservada},{"PUSH", PalabraReservada},
     {"PROG2", PalabraReservada}, {"PROGN", PalabraReservada}, {"QUOTE", PalabraReservada}, {"RASSOC", PalabraReservada},
     {"READ", PalabraReservada}, {"READ-LINE", PalabraReservada}, {"REMOVE", PalabraReservada}, {"REMPROP", PalabraReservada},
     {"REST", PalabraReservada}, {"RETURN", PalabraReservada}, {"REVERSE", PalabraReservada}, {"RPLACA", PalabraReservada},
@@ -72,7 +73,10 @@ const vector<pair<string, TokenType>> operators = {
     {"1+", Operador}
 };
 
-// Función para verificar si una cadena es un número
+const vector<pair<string, TokenType>> demiliters = {
+   {":", Delimitador}
+};
+
 bool isNumero(const string& str)
 {
     for (char ch : str)
@@ -83,31 +87,30 @@ bool isNumero(const string& str)
     return true;
 }
 
-// Función para identificar el tipo de token
+
 TokenType identifyToken(const string& str)
 {
-    // Verificar si la palabra es una palabra reservada
+  
     for (const auto& pair : reservedWords)
     {
         if (str == pair.first)
             return pair.second;
     }
 
-    // Verificar si es un operador
+  
     for (const auto& pair : operators)
     {
         if (str == pair.first)
             return pair.second;
     }
 
-    // Si no es una palabra reservada, un operador, ni un número, considerarla un identificador
+   
     if (isNumero(str))
         return Numero;
 
     return Identificador;
 }
 
-// Función para manejar cadenas y comentarios
 string extractToken(stringstream& sourceStream, char delimiter)
 {
     string token;
@@ -115,7 +118,6 @@ string extractToken(stringstream& sourceStream, char delimiter)
     return token;
 }
 
-// Función para convertir el tipo de token a una cadena
 string tokenTypeToString(TokenType type)
 {
     switch (type)
@@ -135,7 +137,6 @@ string tokenTypeToString(TokenType type)
     }
 }
 
-// Función para tokenizar el código fuente
 vector<Token> tokenize(const string& sourceCode)
 {
     vector<Token> tokens;
@@ -170,7 +171,7 @@ vector<Token> tokenize(const string& sourceCode)
         {
             tokens.push_back({ ",", Comma });
         }
-        else if (ch == '`') // Agregado para manejar la comilla grave
+        else if (ch == '`') 
         {
             tokens.push_back({ "`", ComillaGrave });
         }
@@ -191,12 +192,10 @@ vector<Token> tokenize(const string& sourceCode)
 
 int main()
 {
-    // Solicitar al usuario el nombre del archivo de entrada
     string fileName;
     cout << "Ingrese el nombre del archivo de entrada: ";
     cin >> fileName;
 
-    // Leer el archivo de entrada y convertirlo en una cadena
     string sourceCode;
     {
         stringstream contents_stream;
@@ -210,10 +209,10 @@ int main()
         sourceCode = contents_stream.str();
     }
 
-    // Tokenizar el código fuente
+   
     vector<Token> tokens = tokenize(sourceCode);
 
-    // Imprimir los tokens
+
     for (const Token& token : tokens)
     {
         cout << "Value: " << token.value << "   Type: " << tokenTypeToString(token.type) << endl;

@@ -1,4 +1,4 @@
-//const std::vector<std::pair<std::string, TokenType>> reservedWords = {
+//vector<pair<string, TokenType>> reservedWords = {
 //    {"ABS", PalabraReservada}, {"ACONS", PalabraReservada}, {"ACOS", PalabraReservada}, {"Alt-A", PalabraReservada},
 //    {"Alt-D", PalabraReservada}, {"Alt-H", PalabraReservada}, {"Alt-K", PalabraReservada}, {"AND", Operador},
 //    {"APPEND", PalabraReservada}, {"APPLY", PalabraReservada}, {"ASIN", PalabraReservada}, {"ASSOC", PalabraReservada},
@@ -16,12 +16,12 @@
 //    {"LENGTH", PalabraReservada}, {"LET", PalabraReservada}, {"LET*", PalabraReservada}, {"LIST", PalabraReservada},
 //    {"LIST*", PalabraReservada}, {"LISTP", PalabraReservada}, {"LOAD", PalabraReservada}, {"LOG", PalabraReservada},
 //    {"LOOP", PalabraReservada}, {"MAKE-LIST", PalabraReservada}, {"MAKUNBOUND", PalabraReservada}, {"MAPC", PalabraReservada},
-//    {"MAPCAR", PalabraReservada}, {"MAPLIST", PalabraReservada}, {"MAX", Operador}, {"MEMBER", PalabraReservada},
-//    {"MIN", Operador}, {"MINUSP", PalabraReservada}, {"MOD", Operador}, {"NCONC", PalabraReservada},
-//    {"NIL", PalabraReservada}, {"NOT", Operador}, {"NTH", PalabraReservada}, {"NTHCDR", PalabraReservada},
+//    {"MAPCAR", PalabraReservada}, {"MAPLIST", PalabraReservada}, {"MAX", PalabraReservada}, {"MEMBER", PalabraReservada},
+//    {"MIN", PalabraReservada}, {"MINUSP", PalabraReservada}, {"MOD", PalabraReservada}, {"NCONC", PalabraReservada},
+//    {"NIL", PalabraReservada}, {"NOT", PalabraReservada}, {"NTH", PalabraReservada}, {"NTHCDR", PalabraReservada},
 //    {"NULL", PalabraReservada}, {"NUMBERP", PalabraReservada}, {"ODDP", PalabraReservada}, {"OPEN", PalabraReservada},
-//    {"OR", Operador}, {"PAIRLIS", PalabraReservada}, {"PLUSP", PalabraReservada}, {"PRIN1", PalabraReservada},
-//    {"PRINC", PalabraReservada}, {"PRINT", PalabraReservada}, {"PROG", PalabraReservada}, {"PROG1", PalabraReservada},
+//    {"OR", PalabraReservada}, {"PAIRLIS", PalabraReservada}, {"PLUSP", PalabraReservada}, {"PRIN1", PalabraReservada},
+//    {"PRINC", PalabraReservada}, {"PRINT", PalabraReservada}, {"PROG", PalabraReservada}, {"PROG1", PalabraReservada},{"PUSH", PalabraReservada},
 //    {"PROG2", PalabraReservada}, {"PROGN", PalabraReservada}, {"QUOTE", PalabraReservada}, {"RASSOC", PalabraReservada},
 //    {"READ", PalabraReservada}, {"READ-LINE", PalabraReservada}, {"REMOVE", PalabraReservada}, {"REMPROP", PalabraReservada},
 //    {"REST", PalabraReservada}, {"RETURN", PalabraReservada}, {"REVERSE", PalabraReservada}, {"RPLACA", PalabraReservada},
@@ -35,9 +35,8 @@
 //    {"WHEN", PalabraReservada}, {"WITH-OPEN-FILE", PalabraReservada}, {"ZEROP", PalabraReservada}
 //};
 //
-//const std::vector<std::pair<std::string, TokenType>> operators = {
-//    {"+", Operador}, {"-", Operador}, {"*", Operador}, {"/", Operador},
-//    {"MOD", Operador}, {"MAX", Operador}, {"MIN", Operador}, {"/=", Operador},
+//const vector<pair<string, TokenType>> operators = {
+//    {"+", Operador}, {"-", Operador}, {"*", Operador}, {"/", Operador}, {"/=", Operador},
 //    {"=", Operador}, {">=", Operador}, {"<=", Operador}, {">", Operador}, {"<", Operador},
 //    {"1+", Operador}
 //};
