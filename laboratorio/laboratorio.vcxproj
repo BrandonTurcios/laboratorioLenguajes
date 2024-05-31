@@ -22,9 +22,6 @@
     <ClCompile Include="lexer.cpp" />
     <ClCompile Include="mem.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="lexer.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
