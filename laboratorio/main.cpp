@@ -2,6 +2,24 @@
 #include <fstream>
 #include <sstream>
 #include "Tokenizer.h"
+#include "parser.h"
+Token preveiewNext(std::vector<Token> & vect){
+    Token element= vect[1];
+    return element;
+
+
+}
+
+Token getNextToken(std::vector<Token> & vect){
+
+
+    Token element=vect[0];
+    vect.pop_back();
+    return element;
+
+
+}
+
 
 int main()
 {
@@ -27,17 +45,23 @@ int main()
     // Crear una instancia de Tokenizer
     Tokenizer tokenizer;
 
-    // Tokenizar el código fuente
+    // Tokenizar el cï¿½digo fuente
     std::vector<Token> tokens = tokenizer.tokenize(sourceCode);
 
     // Obtener la lista de tokens con valores y tipos
     std::vector<std::pair<std::string, std::string>> tokenList = tokenizer.getTokenList(tokens);
 
+    Parser parser=Parser(tokens);
+
     // Imprimir los tokens
-    for (const auto& token : tokenList)
+    for (const auto& token : tokens)
     {
-        std::cout << "Value: " << token.first << "   Type: " << token.second << std::endl;
+        std::cout<<"Type: "<< token.type<<"  value: "<<token.value<<std::endl;
+        
+       // std::cout << "Value: " << token.first << "   Type: " << token.second << std::endl;
+
     }
+    parser.start();
 
     return 0;
 }
