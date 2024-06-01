@@ -78,6 +78,37 @@ bool Parser::defun(){
     return true;
 
 }
+
+bool Parser::eval_list(){
+    if(curr_token.type==Identifier||curr_token.type==Macro||curr_token.type==ReservedWord||curr_token.type||curr_token.type==Operator){
+        curr_token=getNextToken();
+        while(curr_token.type!=CloseParen){
+            if(curr_token.type==String||curr_token.type==Identifier||curr_token.type==Number||curr_token.type==ReservedWord){
+                curr_token=getNextToken();
+
+            }else if(curr_token.type==OpenParen){
+                curr_token=getNextToken();
+                eval_list();
+                curr_token=getNextToken();
+            }else{
+                 std::cout<<"Ha ocurrido un erro en  la expression dentro de la lista ="<<curr_token.value<<std::endl;
+                 exit(1);
+                
+            }
+        }
+
+    }else{
+
+        //error
+        std::cout<<"Ha ocurrido un erro evaluando apr de la expression ="<<curr_token.value<<std::endl;
+        exit(1);
+    }
+        
+    return true;
+
+
+}
+
 bool Parser::s_expression(){
     //despues de un (
     if(curr_token.type==Macro){
@@ -96,8 +127,9 @@ bool Parser::s_expression(){
     }else if(curr_token.type==Identifier){
         curr_token=getNextToken();
 
+    
     }else{
-        std::cout<<"Symbol Error Expression shosudl star with a symbol = "<<curr_token.value<<std::endl;
+       std::cout<<"Symbol Error Expression shosudl star with a symbol = "<<curr_token.value<<std::endl;
          exit(1);
         
     }
@@ -110,9 +142,18 @@ bool Parser::s_expression(){
 
 void Parser::start(){
     curr_token=getNextToken();
-    if(curr_token.type==OpenParen){
-        curr_token=getNextToken();
-        s_expression();
+    while (Tokens.size()>0){
+         if(curr_token.type==OpenParen){
+            curr_token=getNextToken();
+            eval_list();
+            curr_token=getNextToken();
+         }else{
+            std::cout<<"Ha ocurriod un erro talvaez la expresion no comenzo con (" <<curr_token.value<<std::endl;
+            exit(1);
+         }
         
     }
+
+    
+
 }

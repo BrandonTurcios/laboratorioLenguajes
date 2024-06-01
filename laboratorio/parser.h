@@ -24,6 +24,7 @@ private:
     std::vector<Token> Tokens;
     Token curr_token;
     bool defun();
+    bool eval_list();
     
 };
 
