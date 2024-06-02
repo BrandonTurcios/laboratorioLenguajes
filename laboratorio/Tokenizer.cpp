@@ -28,7 +28,7 @@ Tokenizer::Tokenizer()
     {"NULL", ReservedWord}, {"NUMBERP", ReservedWord}, {"ODDP", ReservedWord}, {"OPEN", ReservedWord},
     {"OR", ReservedWord}, {"PAIRLIS", ReservedWord}, {"PLUSP", ReservedWord}, {"PRIN1", ReservedWord},
     {"PRINC", ReservedWord}, {"PRINT", ReservedWord}, {"PROG", ReservedWord}, {"PROG1", ReservedWord},{"PUSH", ReservedWord},
-    {"PROG2", ReservedWord}, {"PROGN", ReservedWord}, {"QUOTE", ReservedWord}, {"RASSOC", ReservedWord},
+    {"PROG2", ReservedWord}, {"PROGN", ReservedWord}, {"QUOTE", ReservedWord},{"`",ReservedWord}, {"RASSOC", ReservedWord},
     {"READ", ReservedWord}, {"READ-LINE", ReservedWord}, {"REMOVE", ReservedWord}, {"REMPROP", ReservedWord},
     {"REST", ReservedWord}, {"RETURN", ReservedWord}, {"REVERSE", ReservedWord}, {"RPLACA", ReservedWord},
     {"RPLACD", ReservedWord}, {"SECOND", ReservedWord}, {"SET", ReservedWord}, {"SETQ", ReservedWord},

@@ -15,7 +15,12 @@ public:
     Parser();
     Parser(std::vector<Token> Tokens);
     bool s_expression();
+    bool def_macro();
+    bool params();
+    bool iterator_do();
+    bool eval_list_backquote();
     void start();
+    bool params_backquote();
     Token preveiewNext();
     Token getNextToken();
     
