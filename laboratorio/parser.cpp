@@ -16,6 +16,7 @@ Token Parser::preveiewNext() {
   }
 }
 
+
 Token Parser::getNextToken() {
 
   try {
@@ -57,6 +58,12 @@ bool Parser::defun() {
 }
 
 bool Parser::algebraic_expression(){
+   if(curr_token.value=="="||curr_token.value==">"||curr_token.value=="<"||curr_token.value==">="||curr_token.value=="<="){
+      //Expression must be a number 
+      std::cout<<"Erro  la expresion deberia regresar un numero pero:: "<<curr_token.value<<" no lo hace\n";
+      exit(1);
+   }
+   curr_token=getNextToken();
   //En lisp no existen las expresion algebracias si que los oepradores son funciones
   //+ / * son funciones que se puede llamar.
   /*if(curr_token.type==Operator){
@@ -70,12 +77,14 @@ bool Parser::algebraic_expression(){
   while(curr_token.type!=CloseParen){
     if(curr_token.type==OpenParen){
        curr_token=getNextToken();
-       s_expression();
+       s_expression();//aqui estarai validando un (< 2 3 ) y esto noe es una expresion matematica.
+       curr_token = getNextToken();
     }else if( curr_token.type==Number||curr_token.type==Identifier){
        curr_token=getNextToken();
 
     }else{
-      return false;
+      std::cout<<"Error el simbolo "<<curr_token.value<<" No devuelve un numero\n";
+      exit(1);
     }
   }
   /*
@@ -274,6 +283,30 @@ bool Parser::params_backquote() {
 
 
 bool Parser::conditions(){
+    if(curr_token.value=="="||curr_token.value==">"||curr_token.value=="<"||curr_token.value==">="||curr_token.value=="<="){
+      //Expression must be a number 
+    //  std::cout<<"Erro  la expresion deberia regresar un numero pero:: "<<curr_token.value<<" no lo hace\n";
+    //  exit(1);
+    }
+    if(curr_token.value=="T"){
+      curr_token=getNextToken();
+      return true;
+    }
+        curr_token=getNextToken();
+        while(curr_token.type!=CloseParen){
+           if(curr_token.type==OpenParen){
+              curr_token=getNextToken();
+              algebraic_expression();
+              curr_token = getNextToken();
+               //Tipo T no se soporta por el lenguaje ya que no es Tipo solo es una palabra reservada
+           }else if(curr_token.type==Number ||curr_token.type==Identifier){
+                curr_token=getNextToken();
+            }else{
+              std::cout<<"Error Tipo no valido:: " <<curr_token.value<<"\n";
+              exit(1);
+            }
+        }
+
   return true;
 }
     
@@ -302,8 +335,17 @@ bool Parser::s_expression() {
       eval_list();
     }
   } else if(curr_token.type==Operator){
-    curr_token=getNextToken();
-    algebraic_expression();
+    
+    if(curr_token.value=="="||curr_token.value==">"||curr_token.value=="<"||curr_token.value==">="||curr_token.value=="<="){
+       std::cout << "Evaluando condicion "<<curr_token.value<<"\n";
+       conditions();
+    }else{
+     // curr_token=getNextToken();
+     std::cout << "Evaluando expresion algebraica"<<curr_token.value<<"\n";
+       algebraic_expression();
+    } 
+  
+   
   
   }else if (curr_token.type == Identifier) {
 
@@ -320,7 +362,7 @@ bool Parser::s_expression() {
 }
 
 bool Parser::number() {
-  if (curr_token.type == Number ||curr_token.type==Identifier||curr_token.type ==Operator) {
+  if (curr_token.type == Number ||curr_token.type==Identifier) {
     curr_token = getNextToken();
   } else if(curr_token.type==OpenParen) {
     // Cualquier lista vlaida que retorne un numero se sabe que lo retorna por

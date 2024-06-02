@@ -25,7 +25,6 @@ public:
     bool params_backquote();
     bool algebraic_expression();
     bool conditions();
-    
     Token preveiewNext();
     Token getNextToken();
     
