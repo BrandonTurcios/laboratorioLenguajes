@@ -22,7 +22,7 @@ enum TokenType
     Quote,
     Comma,
     Backquote,
-    Colon
+    Colon,
 };
 
 // Estructura para los tokens
@@ -39,6 +39,7 @@ public:
     std::vector<Token> tokenize(const std::string& sourceCode);
     std::string tokenTypeToString(TokenType type);
     std::vector<std::pair<std::string, std::string>> getTokenList(const std::vector<Token>& tokens);
+
 
 private:
     std::vector<std::pair<std::string, TokenType>> reservedWords;

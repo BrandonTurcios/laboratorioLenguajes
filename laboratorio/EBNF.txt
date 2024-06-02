@@ -1,0 +1,51 @@
+s_expression = atomic_symbol 
+               / "(" s_expression "."s_expression ")" 
+               / list 
+   
+list = "(" s_expression < s_expression > ")"
+
+atomic_symbol = letter atom_part
+
+atom_part = empty / letter atom_part / number atom_part
+
+letter = "a" / "b" / " ..." / "z"
+
+number = "1" / "2" / " ..." / "9"
+
+empty = " "
+
+
+///EBNF
+prorama = {<s_expression>}+
+<s_expression> :: atomic_symbol|list 
+<list> ::=( <s_expression>  { <s_expression >} )| (
+    LIST {<s_expression>}*)|`({<s_expression>}*)
+
+<atomic_symbol>::=<letter><atom_part>
+<atom_part> :: ={<[Letter|number|empty]>}+
+<letter> ::= "a" | "b" |" ..." | "z"
+<number> ::=  "1" | "2" |" ..."| "9"
+<numeral>::= <number>{<numbe>}r*
+<empty> ::=" "
+s_expression=function_def|def_local_function
+function_def::(defun astomic_symbol (<atomic_symbol>*) "atom_part" s_expression)
+def_local_function:: #'(lambda (<atomic_symbol>*) s_expression)
+<map_car>:: <function> <list>
+<operator>=[+|-|/|]
+<identifier>=<atomic_symbol>
+<n_incremento>=<operator><numeral>
+<DO>::s_expression|(DO ((<atomic_symbol> <n_incremento> (<operator><number> <atomic_symbol> )))
+                   (<conditional> 'END ) (<s_expression>))
+
+<seq>::({seq_elem}+)
+<seql_elm>::=<indiv>|<seq>
+<indiv>::=<literal_indiv>|<number>
+<form>::=<consant>| <function_part> {arg}* | variable
+<constant>::=<s_expression>
+<arg> ::=<form>
+<function_part>::=<identifier>
+<identifier> ::=<atomyc_symbol>
+<algebraic>  ::= ([+|-|/|*] {<s_expression>})|s_expression
+
+
+

@@ -12,7 +12,7 @@ Tokenizer::Tokenizer()
     {"CASE", ReservedWord}, {"CDR", ReservedWord}, {"CLOSE", ReservedWord}, {"COND", ReservedWord},{"CONCATENATE", ReservedWord},
     {"CONS", ReservedWord}, {"CONSP", ReservedWord}, {"Control-C", ReservedWord}, {"Control-D", ReservedWord},
     {"Control-E", ReservedWord}, {"Control-L", ReservedWord}, {"Control-Pausa", ReservedWord},
-    {"COPY-LIST", ReservedWord}, {"COS", ReservedWord}, {"DEFUN", ReservedWord}, {"DELETE", ReservedWord},{"DEFMACRO", ReservedWord},
+    {"COPY-LIST", ReservedWord}, {"COS", ReservedWord}, {"DEFUN",Macro}, {"DELETE", ReservedWord},{"DEFMACRO", ReservedWord},
     {"DESCRIBE", ReservedWord}, {"DO", ReservedWord}, {"DO*", ReservedWord}, {"DOLIST", ReservedWord},
     {"DOS", ReservedWord}, {"DOTIMES", ReservedWord}, {"DRIBBLE", ReservedWord}, {"EQ", ReservedWord},
     {"EQUAL", ReservedWord}, {"EVAL", ReservedWord}, {"EVENP", ReservedWord}, {"EVERY", ReservedWord},
@@ -28,7 +28,7 @@ Tokenizer::Tokenizer()
     {"NULL", ReservedWord}, {"NUMBERP", ReservedWord}, {"ODDP", ReservedWord}, {"OPEN", ReservedWord},
     {"OR", ReservedWord}, {"PAIRLIS", ReservedWord}, {"PLUSP", ReservedWord}, {"PRIN1", ReservedWord},
     {"PRINC", ReservedWord}, {"PRINT", ReservedWord}, {"PROG", ReservedWord}, {"PROG1", ReservedWord},{"PUSH", ReservedWord},
-    {"PROG2", ReservedWord}, {"PROGN", ReservedWord}, {"QUOTE", ReservedWord}, {"RASSOC", ReservedWord},
+    {"PROG2", ReservedWord}, {"PROGN", ReservedWord}, {"QUOTE", ReservedWord},{"`",ReservedWord}, {"RASSOC", ReservedWord},
     {"READ", ReservedWord}, {"READ-LINE", ReservedWord}, {"REMOVE", ReservedWord}, {"REMPROP", ReservedWord},
     {"REST", ReservedWord}, {"RETURN", ReservedWord}, {"REVERSE", ReservedWord}, {"RPLACA", ReservedWord},
     {"RPLACD", ReservedWord}, {"SECOND", ReservedWord}, {"SET", ReservedWord}, {"SETQ", ReservedWord},
@@ -48,7 +48,7 @@ Tokenizer::Tokenizer()
     };
 }
 
-// Función para verificar si una cadena es un número
+// Funciï¿½n para verificar si una cadena es un nï¿½mero
 bool Tokenizer::isNumber(const std::string& str)
 {
     for (char ch : str)
@@ -59,7 +59,7 @@ bool Tokenizer::isNumber(const std::string& str)
     return true;
 }
 
-// Función para identificar el tipo de token
+// Funciï¿½n para identificar el tipo de token
 TokenType Tokenizer::identifyToken(const std::string& str)
 {
     for (const auto& pair : reservedWords)
@@ -80,7 +80,7 @@ TokenType Tokenizer::identifyToken(const std::string& str)
     return Identifier;
 }
 
-// Función para manejar cadenas y comentarios
+// Funciï¿½n para manejar cadenas y comentarios
 std::string Tokenizer::extractToken(std::stringstream& sourceStream, char delimiter)
 {
     std::string token;
@@ -88,7 +88,7 @@ std::string Tokenizer::extractToken(std::stringstream& sourceStream, char delimi
     return token;
 }
 
-// Función para convertir el tipo de token a una cadena
+// Funciï¿½n para convertir el tipo de token a una cadena
 std::string Tokenizer::tokenTypeToString(TokenType type)
 {
     switch (type)
@@ -110,7 +110,7 @@ std::string Tokenizer::tokenTypeToString(TokenType type)
     }
 }
 
-// Función para tokenizar el código fuente
+// Funciï¿½n para tokenizar el cï¿½digo fuente
 std::vector<Token> Tokenizer::tokenize(const std::string& sourceCode)
 {
     std::vector<Token> tokens;
@@ -178,7 +178,7 @@ std::vector<Token> Tokenizer::tokenize(const std::string& sourceCode)
     return tokens;
 }
 
-// Función para obtener la lista de tokens con sus valores y tipos
+// Funciï¿½n para obtener la lista de tokens con sus valores y tipos
 std::vector<std::pair<std::string, std::string>> Tokenizer::getTokenList(const std::vector<Token>& tokens)
 {
     std::vector<std::pair<std::string, std::string>> tokenList;
@@ -188,3 +188,5 @@ std::vector<std::pair<std::string, std::string>> Tokenizer::getTokenList(const s
     }
     return tokenList;
 }
+
+
