@@ -55,7 +55,39 @@ bool Parser::defun() {
 
   return true;
 }
+
+bool Parser::algebraic_expression(){
+  //En lisp no existen las expresion algebracias si que los oepradores son funciones
+  //+ / * son funciones que se puede llamar.
+  /*if(curr_token.type==Operator){
+    curr_token=getNextToken();
+  
+  }else{
+    std::cout<<"Error no es un expresion algebraica"<<curr_token.value<<"\n";
+    return false;
+  }*/
+  //las funciones que retornar valores numericos se pueden anidar entonces:
+  while(curr_token.type!=CloseParen){
+    if(curr_token.type==OpenParen){
+       curr_token=getNextToken();
+       s_expression();
+    }else if( curr_token.type==Number||curr_token.type==Identifier){
+       curr_token=getNextToken();
+
+    }else{
+      return false;
+    }
+  }
+  /*
+    Una funcion numerica tambien puede tenre otras funciones que no sean operadores peor como identificadores y demas
+    //pero esta es para expresion base
+  */
+
+  return true;
+}
 bool Parser::eval_list_backquote() {
+  //EVALIST BACKQUOTE DEBE ACEPTAR LA MAYORIA DE TIPOS 
+  //Esto se debe a que el backquote loq u hace es pasarlo a un literal
   if (curr_token.type == Identifier || curr_token.type == Macro ||
       curr_token.type == ReservedWord || curr_token.type ||
       curr_token.type == Operator || true) {
@@ -81,16 +113,27 @@ bool Parser::eval_list_backquote() {
   return true;
 }
 bool Parser::eval_list() {
+  /*La evalaucion de la lista solo se asegura que se siga la estructura de 
+  s_expression=(atomic_simbol....s_expression)
+  donde cualquiere lista debe empezar con un atomic_symbol*/
+   std::cout
+            << "El token es  ="
+            << curr_token.value << std::endl;
   if (curr_token.type == Identifier || curr_token.type == Macro ||
-      curr_token.type == ReservedWord || curr_token.type ||
+      curr_token.type == ReservedWord||
       curr_token.type == Operator) {
-    curr_token = getNextToken();
+      curr_token = getNextToken();
+    
     while (curr_token.type != CloseParen) {
       if (curr_token.type == String || curr_token.type == Identifier ||
           curr_token.type == Number || curr_token.type == ReservedWord) {
         curr_token = getNextToken();
 
       } else if (curr_token.type == OpenParen) {
+        /*En algunos casos puede existir un parentesis
+        osea un s_expresion dentro de la lista por lo que se requiere
+        de evaluarla completamente...
+        param tampoco empieza con un simbolo*/
         curr_token = getNextToken();
         eval_list();
         curr_token = getNextToken();
@@ -112,9 +155,44 @@ bool Parser::eval_list() {
 
   return true;
 }
-bool Parser::params() {
+
+bool Parser::params(){
+    // Este codigo evalua una lista de parametros
+  //Los parametros puede esrcibirse la siguiente forma
+  // (atomic_symbol ...atomic_symbol), todo eso es valido
+  // Este codigo evalua una lista de parametros
+  //Los parametros puede esrcibirse la siguiente forma
+  // (s_expressions...), todo eso es valido
+  //Ya no se ne necesita recursion ese es que se utliza par aevaluar defun 
+  if (curr_token.type == OpenParen) {
+    curr_token = getNextToken();
+    if (curr_token.type == Identifier) {
+      while (curr_token.type != CloseParen) {
+        if (curr_token.type == Identifier) {
+          curr_token = getNextToken();
+        } else {
+          //
+          std::cout << "Error se esperamba que na la lista solo existan "
+                       "definiciones de parametros = "
+                    << curr_token.value << std::endl;
+          exit(1);
+        }
+      }
+      // Termino
+      // rest is an S_Expression
+    } else {
+      std::cout << "lo que se que sea ese toquyen no es un argumento =  "
+                << curr_token.value << std::endl;
+      exit(1);
+    }
+  }
+  return true;
+}
+bool Parser::macro_params() {
 
   // Este codigo evalua una lista de parametros
+  //Los parametros puede esrcibirse la siguiente forma
+  // (s_expressions...), todo eso es valido
   if (curr_token.type == OpenParen) {
     curr_token = getNextToken();
     if (curr_token.type == Identifier || curr_token.type == OpenParen) {
@@ -123,7 +201,7 @@ bool Parser::params() {
           curr_token = getNextToken();
 
         } else if (curr_token.type == OpenParen) {
-          params();
+          macro_params();
           if (curr_token.type == CloseParen) {
             curr_token = getNextToken();
           }
@@ -139,7 +217,7 @@ bool Parser::params() {
       // rest is an S_Expression
 
     } else if (curr_token.type == OpenParen) {
-      params();
+      macro_params();
       //
 
     } else {
@@ -193,6 +271,12 @@ bool Parser::params_backquote() {
   }
   return true;
 }
+
+
+bool Parser::conditions(){
+  return true;
+}
+    
 bool Parser::s_expression() {
   // despues de un (
   if (curr_token.type == Macro) {
@@ -217,9 +301,14 @@ bool Parser::s_expression() {
     } else {
       eval_list();
     }
-  } else if (curr_token.type == Identifier) {
+  } else if(curr_token.type==Operator){
+    curr_token=getNextToken();
+    algebraic_expression();
+  
+  }else if (curr_token.type == Identifier) {
 
     eval_list();
+
 
   } else {
     eval_list();
@@ -231,14 +320,14 @@ bool Parser::s_expression() {
 }
 
 bool Parser::number() {
-  if (curr_token.type == Number ||curr_token.type==Identifier) {
+  if (curr_token.type == Number ||curr_token.type==Identifier||curr_token.type ==Operator) {
     curr_token = getNextToken();
   } else if(curr_token.type==OpenParen) {
     // Cualquier lista vlaida que retorne un numero se sabe que lo retorna por
     // la deifnicon de la funcion.
 
     curr_token = getNextToken();
-    eval_list();
+    s_expression();
     curr_token = getNextToken();
     // Eval aritmetica....
   }else{
@@ -249,7 +338,7 @@ bool Parser::number() {
   return true;
 }
 bool Parser::iterator_do() {
-  if (curr_token.type == OpenParen) {
+  if (curr_token.type == OpenParen) { 
     curr_token = getNextToken();
     if (curr_token.type == OpenParen) {
       curr_token = getNextToken();
@@ -313,7 +402,7 @@ bool Parser::def_macro() {
               << curr_token.value << std::endl;
     exit(1);
   }
-  params();
+  macro_params();
   curr_token = getNextToken();
 
   if (curr_token.value == "`") {

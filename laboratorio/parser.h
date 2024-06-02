@@ -16,6 +16,7 @@ public:
     Parser(std::vector<Token> Tokens);
     bool s_expression();
     bool def_macro();
+    bool macro_params();
     bool params();
     bool iterator_do();
     bool eval_list_backquote();

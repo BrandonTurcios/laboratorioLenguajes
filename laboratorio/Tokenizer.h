@@ -22,7 +22,7 @@ enum TokenType
     Quote,
     Comma,
     Backquote,
-    Colon
+    Colon,
 };
 
 // Estructura para los tokens
