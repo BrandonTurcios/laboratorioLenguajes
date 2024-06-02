@@ -20,6 +20,7 @@ public:
     bool iterator_do();
     bool eval_list_backquote();
     void start();
+    bool number();
     bool params_backquote();
     Token preveiewNext();
     Token getNextToken();
