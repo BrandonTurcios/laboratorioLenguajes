@@ -188,6 +188,9 @@ bool Parser::params_backquote(){
         }
         
  
+    }else{
+        std::cout<<"lo que se que sea ese toquyen no es un argumento Bquote =  "<<curr_token.value<<std::endl;
+        exit(1);
     }
     return true;
 }
@@ -216,7 +219,8 @@ bool Parser::s_expression(){
             
         }
     }else if(curr_token.type==Identifier){
-        curr_token=getNextToken();
+    
+        eval_list();
 
     
     }else{
@@ -225,7 +229,8 @@ bool Parser::s_expression(){
         
     }
 
-    std::cout<<"End";
+    std::cout<<"End   "<<curr_token.value<<"\n";
+
     return true;
   
 
@@ -264,6 +269,7 @@ bool Parser::def_macro(){
         curr_token=getNextToken();
         eval_list_backquote();
 
+
     }
     else{
         std::cout<<"Error en la defincion de defmacro, se espera Body = " <<curr_token.value<<std::endl;
@@ -274,7 +280,7 @@ bool Parser::def_macro(){
 void Parser::start(){
     curr_token=getNextToken();
     while (Tokens.size()>0){
-        std::cout<<"Current Token:  "<<curr_token.value<<std::endl;
+        //std::cout<<"Current Token:  "<<curr_token.value<<std::endl;
          if(curr_token.type==OpenParen){
             curr_token=getNextToken();
             s_expression();
@@ -283,9 +289,14 @@ void Parser::start(){
             std::cout<<"Ha ocurriod un erro talvaez la expresion no comenzo con (" <<curr_token.value<<std::endl;
             exit(1);
          }
+
+
         
     }
 
-    
+    if(curr_token.type!=CloseParen){
+        std::cout<<"Ha ocurriod un erro talvaez la expresion no comenzo con (" <<curr_token.value<<std::endl;
+        exit(1);
+    }
 
 }
