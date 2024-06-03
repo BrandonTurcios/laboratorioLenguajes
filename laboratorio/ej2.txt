@@ -1,0 +1,26 @@
+;GNU CLISP  2.49.60
+;GNU CLISP  2.49.60
+
+
+
+;(LAMBDA (X) (PRINT (* X 2))
+
+(DEFUN CONC(A B)
+    (SETQ B (REVERSE B))
+    (SETQ B (MAPCAR #'(LAMBDA (ITEM) (CONCATENATE 'STRING "1" ITEM)) B))
+    (SETQ A (MAPCAR #'(LAMBDA (ITEM) (CONCATENATE 'STRING "1" ITEM)) A))
+    (SETF M (APPEND A B))
+    M)
+
+
+
+
+
+(DEFUN GEN-MATRIX (N)
+    (IF (= N 1) (SETF M-FINAL '("0" "1"))
+        (PROGN (SETQ M-FINAL (GEN-MATRIX (- N 1)))
+        (SETQ M-FINAL (CONC M-FINAL M-FINAL)
+                )))M-FINAL)
+
+
+(PRINT (GEN-MATRIX 3))
