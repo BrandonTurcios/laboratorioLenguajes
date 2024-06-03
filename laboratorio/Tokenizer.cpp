@@ -2,6 +2,7 @@
 #include <cctype>
 
 // Constructor que inicializa las listas de palabras reservadas y operadores
+// para la tokenizacion. Las palabras reservadas y operadores se almacenan en vectores.
 Tokenizer::Tokenizer()
 {
     reservedWords = {
@@ -48,7 +49,8 @@ Tokenizer::Tokenizer()
     };
 }
 
-// Funci�n para verificar si una cadena es un n�mero
+//Verifica si una cadena de caracteres representa un numero.
+//Recorre cada carácter de la cadena y comprueba si todos son digitos.
 bool Tokenizer::isNumber(const std::string& str)
 {
     for (char ch : str)
@@ -59,7 +61,9 @@ bool Tokenizer::isNumber(const std::string& str)
     return true;
 }
 
-// Funci�n para identificar el tipo de token
+///Esta funcion identifica el tipo de token basado en el valor de la cadena
+// Primero verifica si la cadena es una palabra reservada o un operador, y si no es
+//ninguna de estas, comprueba si es un numero, si no, lo clasifica como identificador
 TokenType Tokenizer::identifyToken(const std::string& str)
 {
     for (const auto& pair : reservedWords)
@@ -80,7 +84,7 @@ TokenType Tokenizer::identifyToken(const std::string& str)
     return Identifier;
 }
 
-// Funci�n para manejar cadenas y comentarios
+// Esta funcion extrae una subcadena de la cadena fuente hasta encontrar un delimitador específico.
 std::string Tokenizer::extractToken(std::stringstream& sourceStream, char delimiter)
 {
     std::string token;
@@ -88,7 +92,7 @@ std::string Tokenizer::extractToken(std::stringstream& sourceStream, char delimi
     return token;
 }
 
-// Funci�n para convertir el tipo de token a una cadena
+// Esta funcion convierte el tipo de token a cadena para imprimirlo
 std::string Tokenizer::tokenTypeToString(TokenType type)
 {
     switch (type)
@@ -110,7 +114,10 @@ std::string Tokenizer::tokenTypeToString(TokenType type)
     }
 }
 
-// Funci�n para tokenizar el c�digo fuente
+// Esta funcion convierte el código de LISP en una lista de tokens.
+// Se recorre la cadena fuente caracter por caracter,
+// identificando y clasificando cada token que se encuentre. 
+// Reconoce los paréntesis, comentarios, cadenas, comillas, comas, backquote, dos puntos y otros tokens.
 std::vector<Token> Tokenizer::tokenize(const std::string& sourceCode)
 {
     std::vector<Token> tokens;
@@ -178,7 +185,7 @@ std::vector<Token> Tokenizer::tokenize(const std::string& sourceCode)
     return tokens;
 }
 
-// Funci�n para obtener la lista de tokens con sus valores y tipos
+// Esta funcion genera una lista de pares que contiene el valor del token y su tipo en formato de string.
 std::vector<std::pair<std::string, std::string>> Tokenizer::getTokenList(const std::vector<Token>& tokens)
 {
     std::vector<std::pair<std::string, std::string>> tokenList;
