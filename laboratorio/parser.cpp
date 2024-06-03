@@ -550,6 +550,7 @@ void Parser::start() {
       if(curr_token.type==OpenParen){
 
       }else{
+        
          curr_token = getNextToken();
       }
      
