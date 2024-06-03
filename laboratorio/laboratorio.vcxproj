@@ -19,8 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="lexer.cpp" />
-    <ClCompile Include="mem.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="parser.cpp" />
+    <ClCompile Include="Tokenizer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="parser.h" />
+    <ClInclude Include="Tokenizer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
