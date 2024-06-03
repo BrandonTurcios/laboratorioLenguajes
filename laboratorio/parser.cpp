@@ -15,8 +15,51 @@ Token Parser::preveiewNext() {
     exit(1);
   }
 }
+bool Parser::list(){
+    while(curr_token.type!=CloseParen){
+
+      if(curr_token.value==":"){
+        curr_token=getNextToken();
+          if (curr_token.type==Identifier){
+              curr_token=getNextToken();
+           }else{
+            std::cout<<"ERROR simbolo invalidad <<"<<curr_token.value<<"\n";
+            exit(1);
+        
+          }
+      }else if(curr_token.type==Identifier||curr_token.type==Number||curr_token.type==String){
+        curr_token=getNextToken();
+      }else{ 
+         std::cout<<"ERROR simbolo invalidad <<"<<curr_token.value<<"\n";
+         exit(1);
+
+      }
 
 
+
+    }
+  return true;
+
+}
+bool Parser::dolist(){
+
+  params();
+  curr_token=getNextToken();
+  if(curr_token.type==OpenParen){
+    if(!s_expression()){
+        std::cerr << "Error 2en dolist falta la expresion ::" << curr_token.value << std::endl;
+         exit(1);
+    }
+
+  }else{
+    std::cerr << "Erro en dolist falta la expresion ::" << curr_token.value << std::endl;
+    exit(1);
+  }
+  
+ return true;
+  
+
+}
 Token Parser::getNextToken() {
 
   try {
@@ -35,8 +78,30 @@ Token Parser::getNextToken() {
     return Token();
   }
 }
+
+bool Parser::defvar(){
+  if(curr_token.type==Identifier){
+    curr_token=getNextToken();
+   
+  }
+  else{
+    std::cout<<"El simbolo en la signacion esta mal, falta el nombre :"<<curr_token.value<<"\n";
+        exit(1);
+  }
+  if(curr_token.type==Number||curr_token.type==String){
+      curr_token=getNextToken(); 
+  }
+  if(curr_token.type==OpenParen){
+      curr_token=getNextToken();
+      s_expression();
+  }
+  return true;
+
+}
 bool Parser::defun() {
   if (curr_token.type == Identifier) {
+    std::cout << "Defun type value ="
+              << curr_token.value << std::endl;
     curr_token = getNextToken();
   } else {
     std::cout << "Error defun is waiting an identifier type not valid ="
@@ -44,14 +109,13 @@ bool Parser::defun() {
     exit(1);
   }
   if (params()) {
-    curr_token = getNextToken();
+    curr_token=getNextToken();
   }
   // Body de la funcion
-  if (curr_token.type == OpenParen) {
-    curr_token = getNextToken();
-    s_expression();
-
-  } else {
+  while(curr_token.type!=CloseParen){
+      curr_token=getNextToken();
+      s_expression();
+    
   }
 
   return true;
@@ -189,7 +253,10 @@ bool Parser::params(){
       }
       // Termino
       // rest is an S_Expression
-    } else {
+    } else if(curr_token.type==CloseParen){
+     // curr_token=getNextToken();
+
+    }else {
       std::cout << "lo que se que sea ese toquyen no es un argumento =  "
                 << curr_token.value << std::endl;
       exit(1);
@@ -316,6 +383,7 @@ bool Parser::s_expression() {
     if (curr_token.value == "DEFUN") {
       curr_token = getNextToken();
       defun();
+      //defun can hace Prog insign thar mean tha it can have mutliple expressions
       curr_token = getNextToken();
     }
     // Palabras reservadas
@@ -331,7 +399,19 @@ bool Parser::s_expression() {
       iterator_do();
       //  curr_token=getNextToken();
 
-    } else {
+    }else if(curr_token.value=="DO-LIST"){
+      dolist();
+      curr_token=getNextToken();
+    }else if(curr_token.value=="DEFVAR"){
+        curr_token=getNextToken();
+        defvar();
+        curr_token=getNextToken();
+
+    }else if(curr_token.value=="LIST"){
+        curr_token=getNextToken();
+        list();
+        //curr_token=getNextToken();
+    }else{
       eval_list();
     }
   } else if(curr_token.type==Operator){
@@ -458,14 +538,22 @@ bool Parser::def_macro() {
 
   return true;
 }
+
+
 void Parser::start() {
   curr_token = getNextToken();
   while (Tokens.size() > 0) {
-    // std::cout<<"Current Token:  "<<curr_token.value<<std::endl;
+    std::cout<<"Current Token:  "<<curr_token.value<<std::endl;
     if (curr_token.type == OpenParen) {
       curr_token = getNextToken();
       s_expression();
-      curr_token = getNextToken();
+      if(curr_token.type==OpenParen){
+
+      }else{
+        
+         curr_token = getNextToken();
+      }
+     
     } else {
       std::cout << "Ha ocurriod un erro talvaez la expresion no comenzo con ("
                 << curr_token.value << std::endl;
