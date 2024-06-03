@@ -34,9 +34,11 @@ def_local_function:: #'(lambda (<atomic_symbol>*) s_expression)
 <operator>=[+|-|/|]
 <identifier>=<atomic_symbol>
 <n_incremento>=<operator><numeral>
-<DO>::s_expression|(DO ((<atomic_symbol> <n_incremento> (<operator><number> <atomic_symbol> )))
+<do>::s_expression|(DO ((<atomic_symbol> <n_incremento> (<operator><number> <atomic_symbol> )))
                    (<conditional> 'END ) (<s_expression>))
-
+<dolist>::(DO ({<args>}+) <s_expresion>);
+<ciclo_loop>::()
+<asignacion>:: (DEFVAR <identificador> <s_expresion>)
 <seq>::({seq_elem}+)
 <seql_elm>::=<indiv>|<seq>
 <indiv>::=<literal_indiv>|<number>
